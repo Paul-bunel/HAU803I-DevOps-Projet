@@ -4,7 +4,7 @@
 
 # Définition des différentes variables
 CC = g++# compilateur
-CFLAGS = -Wall -Wextra -Wfatal-errors -ansi -pedantic -std=c++2a# flags (= options) à passer au compilateur
+CFLAGS = -Wall -Wextra -Wfatal-errors -MMD -ansi -pedantic -std=c++2a# flags (= options) à passer au compilateur
 SRC_CORE_DIR = src
 OBJ_CORE_DIR = obj
 SRC_CORE = $(wildcard $(SRC_CORE_DIR)/*.cpp)# fichiers sources
@@ -17,7 +17,10 @@ OBJ_MAIN = $(patsubst %.cpp,%.o,$(SRC_MAIN))
 
 SRC = $(SRC_MAIN) $(SRC_CORE)
 OBJ= $(OBJ_MAIN) $(OBJ_CORE)
-EXE=main# nom du fichier executable
+
+LIBS_FLAGS = -Iinclude -I.
+
+EXE=main_exe# nom du fichier executable
 ifeq ($(OS),Windows_NT) # change la commande à appeler en fonction de l'OS
 	RM=del /S /Q
 else
@@ -27,17 +30,19 @@ endif
 all : $(OBJ) # vérifie que les fichiers objets soient à jour
 # génère l'executable en compilant les fichiers objets (.o) obtenus en
 # ammont par la compilation des fichiers sources (.cpp)
-	$(CC) -o $(EXE) $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $(EXE) $(LIBS_FLAGS)
 
 # supprime tout (sauf les fichiers sources évidemment)
 clean:
-	$(RM) *.o $(EXE)
+	$(RM) *.o *.d $(EXE)
 
 re : clean all # appel d'un "make re" permet de tout clean puis tout compiler
 
 # compile les fichiers sources (.cpp) pour obtenir les fichiers objets (.o)
 %.o : %.cpp
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS_FLAGS)
 
 $(OBJ_CORE_DIR)/%.o : $(SRC_CORE_DIR)/%.cpp
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS_FLAGS)
+
+-include $(OBJ:.o=.d)

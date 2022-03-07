@@ -13,7 +13,7 @@ void FastaHandler::parse() {
     std::string sequence, header;
 
     if (!(*file).is_open()) {
-        std::cout << "Error, file could'nt be opened." << std::endl;
+        std::cout << "Error, file couldn't be opened." << std::endl;
     } else {
         content.assign(std::istreambuf_iterator<char>(*file),
                         std::istreambuf_iterator<char>());

@@ -32,5 +32,6 @@
 *.app
 
 #test files
+test
 *.fasta
 *.fq
