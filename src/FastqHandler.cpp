@@ -1,12 +1,7 @@
-#include "FastqHandler.hpp"
+#include "../include/FastqHandler.hpp"
 
-FastqHandler::FastqHandler(std::ifstream& _file): FileHandler(_file) {
-    parse();
-}
-
-FastqHandler::FastqHandler(std::string _file): FileHandler(_file) {
-    parse();
-}
+// FastqHandler::FastqHandler(std::ifstream& _file): FileHandler(_file) { }
+// FastqHandler::FastqHandler(std::string _file): FileHandler(_file) { }
 
 void FastqHandler::parse() {
     // std::string line;

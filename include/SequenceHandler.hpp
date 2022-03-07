@@ -5,6 +5,7 @@
 class SequenceHandler {
 protected:
     std::string sequence;
+    std::string header;
     std::string reverse;
     bool valid;
 
@@ -14,11 +15,12 @@ protected:
     void setValid(const bool);
 
 public:
-    SequenceHandler(const std::string &);
+    SequenceHandler(const std::string &, const std::string &);
 
     std::string getSequence() const;
-    bool getValid() const;
+    std::string getHeader() const;
     std::string getReverse();
+    bool getValid() const;
 
     void setSequence(const std::string &);
 

@@ -1,14 +1,13 @@
-#include "FileHandler.hpp"
+#include "../include/FileHandler.hpp"
 
 FileHandler::FileHandler(std::ifstream& _file) {
     file = &_file;
 }
-
 FileHandler::FileHandler(const std::string _file) {
     file = new std::ifstream(_file);
 }
 
-void FileHandler::parse() {}
+void FileHandler::parse() { }
 
 std::vector<SequenceHandler*> FileHandler::getSeqsVector() const {
     return seqs;

@@ -1,18 +1,22 @@
-#include "FastaSeqHandler.hpp"
+#include "../include/SequenceHandler.hpp"
 #include <iostream>
 #include <cctype>
 
 const std::string SequenceHandler::nucleotideIUPAC = "ACGTU\nRYSWKMBDHVN.-";
-const std::string  SequenceHandler::aaIUPAC = "ACDEFGHIKLMNPQRSTVWY\n";
+const std::string SequenceHandler::aaIUPAC = "ACDEFGHIKLMNPQRSTVWY\n";
 
-SequenceHandler::SequenceHandler(const std::string & _sequence) {
-    sequence = _sequence;
+SequenceHandler::SequenceHandler(const std::string &_header, const std::string &_sequence = "")
+: sequence(_sequence), header(_header) {
     reverse.reserve(sequence.size());
     valid = isSequenceValid(sequence);
 }
 
 std::string SequenceHandler::getSequence() const {
     return sequence;
+}
+
+std::string SequenceHandler::getHeader() const {
+    return header;
 }
 
 void SequenceHandler::setValid(const bool _valid) {

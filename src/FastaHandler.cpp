@@ -1,9 +1,8 @@
-#include "FastaHandler.hpp"
+#include "../include/FastaHandler.hpp"
 
 FastaHandler::FastaHandler(std::ifstream& _file): FileHandler(_file) {
     parse();
 }
-
 FastaHandler::FastaHandler(const std::string _file): FileHandler(_file) {
     parse();
 }
@@ -22,7 +21,6 @@ void FastaHandler::parse() {
 
     nbSeqs = std::count(content.begin(), content.end(), '>');
     size_t pos = 0, eol = 0;
-
     for (size_t i = 0; i < nbSeqs; i++) {
         eol = content.find('\n', eol + 1);
         header = content.substr(pos, eol-pos);
@@ -32,9 +30,10 @@ void FastaHandler::parse() {
 
         eol = pos;
 
-        FastaSeqHandler* sh = new FastaSeqHandler(header, sequence);
+        SequenceHandler* sh = new SequenceHandler(header, sequence);
         seqs.push_back(sh);
         header.clear();
         sequence.clear();
     }
 }
+
