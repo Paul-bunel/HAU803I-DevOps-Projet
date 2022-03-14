@@ -5,7 +5,6 @@ FileHandler::FileHandler(std::ifstream& _file) {
 }
 FileHandler::FileHandler(const std::string _file) {
     file = new std::ifstream(_file);
-    std::cout << "Fichier " << _file << " ouvert" << std::endl;
 }
 
 void FileHandler::parse() { }

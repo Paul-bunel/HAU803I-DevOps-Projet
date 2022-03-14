@@ -19,10 +19,6 @@ std::string SequenceHandler::getHeader() const {
     return header;
 }
 
-void SequenceHandler::setValid(const bool _valid) {
-    valid = _valid;
-}
-
 bool SequenceHandler::getValid() const {
     return valid;
 }
